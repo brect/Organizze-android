@@ -3,56 +3,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".activity.LoginActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textoAcessoConta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:textColor="@android:color/black"
-        android:text="Crie sua conta grátis"
+        android:layout_marginBottom="16dp"
+        android:text="Acesse sua conta"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@+id/inputEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <TextView
-        android:id="@+id/textView4"
+    <EditText
+        android:id="@+id/inputEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:gravity="center"
-        android:textColor="@android:color/darker_gray"
-        android:text="Junte-se a mais de meio milhão \nde pessoas e comece já"
-        app:layout_constraintBottom_toTopOf="@+id/btnCadastrar"
+        android:layout_marginBottom="8dp"
+        android:drawableLeft="@drawable/ic_email_cinza"
+        android:ems="10"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/inputPass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textoAcessoConta" />
+
+    <EditText
+        android:id="@+id/inputPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_lock_cinza"
+        android:ems="10"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/btnEfetuarLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
 
     <Button
-        android:id="@+id/btnCadastrar"
+        android:id="@+id/btnEfetuarLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cadastre-se"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/btnLogar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Já tenho conta"
-        android:textColor="@android:color/darker_gray"
+        android:layout_marginTop="16dp"
+        android:text="Entrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCadastrar" />
+        app:layout_constraintTop_toBottomOf="@+id/inputPass" />
 </androidx.constraintlayout.widget.ConstraintLayout>
