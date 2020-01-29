@@ -1,15 +1,22 @@
-package com.blimas.organizze;
+package com.blimas.organizze.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
+import com.blimas.organizze.R;
 import com.blimas.organizze.activity.CadastroActivity;
 import com.blimas.organizze.activity.LoginActivity;
 import com.heinrichreimersoftware.materialintro.app.IntroActivity;
 import com.heinrichreimersoftware.materialintro.slide.FragmentSlide;
+
+import java.util.zip.Inflater;
 
 public class MainActivity extends IntroActivity {
 
@@ -21,13 +28,9 @@ public class MainActivity extends IntroActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        
-        btnLogar = findViewById(R.id.btnLogar);
-        btnCadastrar = findViewById(R.id.btnCadastrar);
+//        setContentView(R.layout.activity_main);
 
         configuraFragmentsSlide();
-
 
     }
 
@@ -70,14 +73,14 @@ public class MainActivity extends IntroActivity {
     }
 
 
-//    public void efetuarCadastro(){
-//        Intent intent = new Intent(getApplicationContext(), CadastroActivity.class);
-//        startActivity(intent);
-//    }
+    public void efetuarCadastro(View view){
+        Intent intent = new Intent(getApplicationContext(), CadastroActivity.class);
+        startActivity(intent);
+    }
 
-//    public void efetuarLogin(){
-//        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//        startActivity(intent);
-//    }
+    public void efetuarLogin(View view){
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+    }
 
 }
