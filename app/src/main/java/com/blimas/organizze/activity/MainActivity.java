@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import com.blimas.organizze.R;
 import com.blimas.organizze.activity.CadastroActivity;
 import com.blimas.organizze.activity.LoginActivity;
+import com.blimas.organizze.config.ConfiguracaoFirebase;
+import com.google.firebase.auth.FirebaseAuth;
 import com.heinrichreimersoftware.materialintro.app.IntroActivity;
 import com.heinrichreimersoftware.materialintro.slide.FragmentSlide;
 
@@ -21,8 +23,7 @@ import java.util.zip.Inflater;
 public class MainActivity extends IntroActivity {
 
 
-    private TextView btnLogar;
-    private Button btnCadastrar;
+    private FirebaseAuth auth;
 
 
     @Override
@@ -32,6 +33,12 @@ public class MainActivity extends IntroActivity {
 
         configuraFragmentsSlide();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        verificarUsuarioLogado();
     }
 
     private void configuraFragmentsSlide() {
@@ -83,4 +90,15 @@ public class MainActivity extends IntroActivity {
         startActivity(intent);
     }
 
+    public void verificarUsuarioLogado(){
+        auth = ConfiguracaoFirebase.getAuth();
+//        auth.signOut();
+        if( auth.getCurrentUser() != null ){
+            abrirTelaPrincipal();
+        }
+    }
+
+    public void abrirTelaPrincipal(){
+        startActivity(new Intent(this, PrincipalActivity.class));
+    }
 }

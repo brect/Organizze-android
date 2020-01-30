@@ -9,8 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.LoginActivity"></activity>
-        <activity android:name=".activity.CadastroActivity" />
+        <activity
+            android:name=".activity.DespesaActivity"
+            android:theme="@style/despesaTheme"/>
+        <activity
+            android:name=".activity.ReceitaActivity"
+            android:theme="@style/receitaTheme"/>
+        <activity
+            android:name=".activity.PrincipalActivity"
+            android:label="@string/title_activity_principal"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.MainActivity"
             android:theme="@style/Theme.Intro">
@@ -20,6 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.CadastroActivity" />
     </application>
 
 </manifest>
