@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.blimas.organizze.R;
 import com.blimas.organizze.config.ConfiguracaoFirebase;
+import com.blimas.organizze.helper.Base64Custom;
 import com.blimas.organizze.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -83,6 +84,11 @@ public class CadastroActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+
+                    String idUser = Base64Custom.encodeBase64(user.getEmail());
+                    user.setIdUser(idUser);
+                    user.salvar();
+
                     finish();
 //                    Toast.makeText(CadastroActivity.this, "Sucesso ao cadastrar usuário", Toast.LENGTH_SHORT).show();
                 }else{

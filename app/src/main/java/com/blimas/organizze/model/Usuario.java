@@ -1,12 +1,29 @@
 package com.blimas.organizze.model;
 
+import com.blimas.organizze.config.ConfiguracaoFirebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+
 public class Usuario {
 
+    private String idUser;
     private String nome;
     private String email;
     private String senha;
+    private Double receitaTotal = 0.00;
+    private Double despesaTotal = 0.00;
+
 
     public Usuario() {
+    }
+
+    @Exclude
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public String getNome() {
@@ -25,11 +42,36 @@ public class Usuario {
         this.email = email;
     }
 
+    @Exclude
     public String getSenha() {
         return senha;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+
+    public void salvar(){
+        DatabaseReference referenceFirebase = ConfiguracaoFirebase.getFirebaseDatabase();
+        referenceFirebase.child("usuarios")
+                .child(this.idUser)
+                .setValue(this);
+    }
+
+    public Double getReceitaTotal() {
+        return receitaTotal;
+    }
+
+    public void setReceitaTotal(Double receitaTotal) {
+        this.receitaTotal = receitaTotal;
+    }
+
+    public Double getDespesaTotal() {
+        return despesaTotal;
+    }
+
+    public void setDespesaTotal(Double despesaTotal) {
+        this.despesaTotal = despesaTotal;
     }
 }

@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
+            android:id="@+id/valorDespesa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -31,7 +32,7 @@
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dataDespesa"
+        android:id="@+id/lblDataDespesa"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
@@ -41,43 +42,46 @@
         app:layout_constraintVertical_chainStyle="packed">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dataDespesa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ex: 19/01/2020" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/categoriaDespesa"
+        android:id="@+id/lblCategoriaDespesa"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataDespesa">
+        app:layout_constraintTop_toBottomOf="@+id/lblDataDespesa">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/categoriaDespesa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ex: Salário" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/descricaoDespesa"
+        android:id="@+id/lblDescricaoDespesa"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoriaDespesa">
+        app:layout_constraintTop_toBottomOf="@+id/lblCategoriaDespesa">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/descricaoDespesa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ex: Salário mensal" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/fabSalvar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
