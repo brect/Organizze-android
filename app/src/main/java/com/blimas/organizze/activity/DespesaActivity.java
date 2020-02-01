@@ -49,8 +49,8 @@ public class DespesaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_despesa);
 
         campoValor = findViewById(R.id.valorDespesa);
-        Locale mLocale = new Locale("pt", "BR");
-        campoValor.addTextChangedListener(new MonetaryMask(campoValor, mLocale));
+//        Locale mLocale = new Locale("pt", "BR");
+//        campoValor.addTextChangedListener(new MonetaryMask(campoValor, mLocale));
 
         campoData = findViewById(R.id.dataDespesa);
         campoCategoria  = findViewById(R.id.categoriaDespesa);
@@ -88,6 +88,8 @@ public class DespesaActivity extends AppCompatActivity {
             atualizaDespesa(despesaAtualizada);
 
             movimentacao.salvar(dataEscolhida);
+
+            finish();
         }
     }
 

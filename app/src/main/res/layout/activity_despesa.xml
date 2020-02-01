@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:ems="10"
+            android:maxLength="25"
                 android:gravity="end"
                 android:hint="Digite o valor"
                 android:inputType="numberDecimal"

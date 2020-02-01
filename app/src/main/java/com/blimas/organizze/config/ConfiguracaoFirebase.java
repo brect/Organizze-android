@@ -11,6 +11,8 @@ public class ConfiguracaoFirebase {
     private static FirebaseAuth auth;
     private static DatabaseReference databaseReference;
 
+
+
     //retorna a instancia do FirebaseDatabase
     public static DatabaseReference getFirebaseDatabase(){
         if (databaseReference == null){
@@ -27,5 +29,12 @@ public class ConfiguracaoFirebase {
         }
         return auth;
     }
+
+//    public DatabaseReference getUserRef(){
+//        String user = auth.getCurrentUser().getEmail();
+//        String idUser = Base64Custom.encodeBase64(user);
+//        DatabaseReference userRef = databaseReference.child("usuarios").child(idUser);
+//        return userRef;
+//    }
 
 }

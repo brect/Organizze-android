@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:ems="10"
+            android:maxLength="25"
             android:gravity="end"
             android:hint="Digite o valor"
             android:inputType="numberDecimal"
@@ -37,7 +38,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dataReceita"
+        android:id="@+id/lblDataReceita"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
@@ -47,36 +48,39 @@
         app:layout_constraintVertical_chainStyle="packed">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dataReceita"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ex: 19/01/2020" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/categoriaReceita"
+        android:id="@+id/lblCategoriaReceita"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataReceita">
+        app:layout_constraintTop_toBottomOf="@+id/lblDataReceita">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/categoriaReceita"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ex: Salário" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/descricaoReceita"
+        android:id="@+id/lblDescricaoReceita"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoriaReceita">
+        app:layout_constraintTop_toBottomOf="@+id/lblCategoriaReceita">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/descricaoReceita"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ex: Salário mensal" />
