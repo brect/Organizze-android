@@ -11,4 +11,15 @@ public class DateCustom {
         String dataString = simpleDateFormat.format(date);
         return dataString;
     }
+
+    public static String dataMes(String data){
+
+        String dateArray[] = data.split("/");
+        String dia = dateArray[0];
+        String mes = dateArray[1];
+        String ano = dateArray[2];
+
+        String mesAno = mes + ano;
+        return mesAno;
+    }
 }

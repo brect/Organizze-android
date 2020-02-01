@@ -19,16 +19,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/valorDespesa"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lblValorDespesa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:gravity="end"
-            android:hint="R$ 00.00"
-            android:inputType="numberDecimal"
-            android:textColor="@android:color/white"
-            android:textSize="30dp" />
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/valorDespesa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="end"
+                android:hint="R$ 00.00"
+                android:inputType="numberDecimal"
+                android:textColor="@android:color/white"
+                android:textSize="30dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout

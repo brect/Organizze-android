@@ -1,5 +1,6 @@
 package com.blimas.organizze.config;
 
+import com.blimas.organizze.helper.Base64Custom;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
