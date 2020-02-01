@@ -15,7 +15,6 @@ import com.blimas.organizze.model.Movimentacao;
 import java.util.List;
 
 public class AdapterMovimentacao extends RecyclerView.Adapter<AdapterMovimentacao.MyViewHolder> {
-
     List<Movimentacao> movimentacoes;
     Context context;
 
@@ -38,8 +37,9 @@ public class AdapterMovimentacao extends RecyclerView.Adapter<AdapterMovimentaca
         holder.titulo.setText(movimentacao.getDescricao());
         holder.valor.setText(String.valueOf(movimentacao.getValor()));
         holder.categoria.setText(movimentacao.getCategoria());
+        holder.valor.setTextColor(context.getResources().getColor(R.color.colorAccentReceita));
 
-        if (movimentacao.getTipo() == "despesa" || movimentacao.getTipo().equals("despesa")) {
+        if (movimentacao.getTipo().equals("d")) {
             holder.valor.setTextColor(context.getResources().getColor(R.color.colorAccent));
             holder.valor.setText("-" + movimentacao.getValor());
         }
@@ -64,5 +64,4 @@ public class AdapterMovimentacao extends RecyclerView.Adapter<AdapterMovimentaca
         }
 
     }
-
 }

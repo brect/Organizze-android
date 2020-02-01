@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,17 +54,21 @@ public class PrincipalActivity extends AppCompatActivity {
     private DatabaseReference dbRef = ConfiguracaoFirebase.getFirebaseDatabase();
     private FirebaseAuth auth = ConfiguracaoFirebase.getAuth();
     private DatabaseReference userRef;
+    private DatabaseReference movimentacaoRef;
 
     private ValueEventListener valueEventListenerUsuario;
+    private ValueEventListener valueEventListenerMovimentacoes;
 
     private RecyclerView recyclerView;
     private AdapterMovimentacao adapterMovimentacao;
     private List<Movimentacao> movimentacoes = new ArrayList<>();
+    private String mesAnoSelecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Organizze");
         setSupportActionBar(toolbar);
@@ -74,6 +79,8 @@ public class PrincipalActivity extends AppCompatActivity {
         textoValorSaldo = findViewById(R.id.textoValorSaldo);
         calendarView = findViewById(R.id.calendarView);
         recyclerView = findViewById(R.id.recyclerMovimentacoes);
+
+        configuraCalendarView();
 
         addDespesa = findViewById(R.id.menu_despesa);
         addDespesa.setOnClickListener(new View.OnClickListener() {
@@ -92,28 +99,59 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         });
 
-        configuraCalendarView();
+        //Configurar adapter
+        adapterMovimentacao = new AdapterMovimentacao(movimentacoes,this);
 
-        //Configura adapter recyclerView
-        adapterMovimentacao = new AdapterMovimentacao(movimentacoes, this);
-
-        //configura recyclerview
+        //Configurar RecyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager( layoutManager );
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapterMovimentacao);
+        recyclerView.setAdapter( adapterMovimentacao );
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         recuperaResumo();
+        recuperarMovimentacoes();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         userRef.removeEventListener(valueEventListenerUsuario);
+        movimentacaoRef.removeEventListener(valueEventListenerMovimentacoes);
+    }
+
+    public void recuperarMovimentacoes(){
+
+        String emailUsuario = auth.getCurrentUser().getEmail();
+        String idUsuario = Base64Custom.encodeBase64( emailUsuario );
+        movimentacaoRef = dbRef.child("movimentacao")
+                .child( idUsuario )
+                .child( mesAnoSelecionado );
+
+        Log.i("dadosRetorno", "recuperarMovimentacoes: " + mesAnoSelecionado);
+
+        valueEventListenerMovimentacoes = movimentacaoRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                movimentacoes.clear();
+                for (DataSnapshot dados: dataSnapshot.getChildren() ){
+
+                    Movimentacao movimentacao = dados.getValue( Movimentacao.class );
+                    movimentacoes.add( movimentacao );
+
+                }
+                adapterMovimentacao.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void recuperaResumo(){
@@ -132,12 +170,11 @@ public class PrincipalActivity extends AppCompatActivity {
                 receitaTotal = user.getReceitaTotal();
                 resumoUsuario = receitaTotal - despesaTotal;
 
-                DecimalFormat decimalFormat = new DecimalFormat("0.00");
-//                DecimalFormat decimalFormat = new DecimalFormat("0.##");
-                String resultadoFormatado = decimalFormat.format(resumoUsuario);
+                DecimalFormat decimalFormat = new DecimalFormat("0.##");
+                String resultadoFormatado = decimalFormat.format( resumoUsuario );
 
-                textoSaudacao.setText("Olá, " + user.getNome());
-                textoValorSaldo.setText("R$ " + resultadoFormatado);
+                textoSaudacao.setText("Olá, " + user.getNome() );
+                textoValorSaldo.setText( "R$ " + resultadoFormatado );
 
 
             }
@@ -158,14 +195,11 @@ public class PrincipalActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         switch (item.getItemId()){
             case R.id.menuSair:
                 deslogarUsuario();
                 break;
-
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -177,13 +211,21 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private void configuraCalendarView() {
 
-        CharSequence meses[] = {"Janeiro","Fevereiro","Marco","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"};
-        calendarView.setTitleMonths(meses);
+        CharSequence meses[] = {"Janeiro","Fevereiro", "Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"};
+        calendarView.setTitleMonths( meses );
+
+        CalendarDay dataAtual = calendarView.getCurrentDate();
+        String mesSelecionado = String.format("%02d", (dataAtual.getMonth() + 1) );
+        mesAnoSelecionado = String.valueOf( mesSelecionado + "" + dataAtual.getYear() );
 
         calendarView.setOnMonthChangedListener(new OnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
+                String mesSelecionado = String.format("%02d", (date.getMonth() + 1) );
+                mesAnoSelecionado = String.valueOf( mesSelecionado + "" + date.getYear() );
 
+                movimentacaoRef.removeEventListener( valueEventListenerMovimentacoes );
+                recuperarMovimentacoes();
             }
         });
     }
