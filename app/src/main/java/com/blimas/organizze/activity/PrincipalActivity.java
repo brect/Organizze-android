@@ -3,8 +3,10 @@ package com.blimas.organizze.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.blimas.organizze.adapter.AdapterMovimentacao;
 import com.blimas.organizze.config.ConfiguracaoFirebase;
 import com.blimas.organizze.helper.Base64Custom;
+import com.blimas.organizze.model.Movimentacao;
 import com.blimas.organizze.model.Usuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -12,6 +14,8 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +34,8 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PrincipalActivity extends AppCompatActivity {
 
@@ -50,6 +56,9 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private ValueEventListener valueEventListenerUsuario;
 
+    private RecyclerView recyclerView;
+    private AdapterMovimentacao adapterMovimentacao;
+    private List<Movimentacao> movimentacoes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +70,10 @@ public class PrincipalActivity extends AppCompatActivity {
 
         deslogar = findViewById(R.id.menuSair);
 
-        calendarView = findViewById(R.id.calendarView);
         textoSaudacao = findViewById(R.id.textoSaudacao);
         textoValorSaldo = findViewById(R.id.textoValorSaldo);
+        calendarView = findViewById(R.id.calendarView);
+        recyclerView = findViewById(R.id.recyclerMovimentacoes);
 
         addDespesa = findViewById(R.id.menu_despesa);
         addDespesa.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +93,15 @@ public class PrincipalActivity extends AppCompatActivity {
         });
 
         configuraCalendarView();
+
+        //Configura adapter recyclerView
+        adapterMovimentacao = new AdapterMovimentacao(movimentacoes, this);
+
+        //configura recyclerview
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapterMovimentacao);
     }
 
     @Override
