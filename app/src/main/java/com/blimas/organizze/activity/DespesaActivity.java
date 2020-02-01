@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,6 +14,7 @@ import com.blimas.organizze.helper.Base64Custom;
 import com.blimas.organizze.helper.DateCustom;
 import com.blimas.organizze.model.Movimentacao;
 import com.blimas.organizze.model.Usuario;
+import com.blimas.organizze.util.MonetaryMask;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +22,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Locale;
 
 public class DespesaActivity extends AppCompatActivity {
 
@@ -39,12 +41,16 @@ public class DespesaActivity extends AppCompatActivity {
     private Double despesaTotal;
     private Double despesaAtualizada;
 
+    private MonetaryMask moneyMask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_despesa);
 
         campoValor = findViewById(R.id.valorDespesa);
+        Locale mLocale = new Locale("pt", "BR");
+        campoValor.addTextChangedListener(new MonetaryMask(campoValor, mLocale));
 
         campoData = findViewById(R.id.dataDespesa);
         campoCategoria  = findViewById(R.id.categoriaDespesa);

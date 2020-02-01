@@ -51,7 +51,6 @@ public class Usuario {
         this.senha = senha;
     }
 
-
     public void salvar(){
         DatabaseReference referenceFirebase = ConfiguracaoFirebase.getFirebaseDatabase();
         referenceFirebase.child("usuarios")

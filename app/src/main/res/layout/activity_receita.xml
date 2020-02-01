@@ -20,14 +20,17 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
+            android:id="@+id/valorReceita"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
+            android:ems="10"
             android:gravity="end"
-            android:hint="R$ 00.00"
+            android:hint="Digite o valor"
             android:inputType="numberDecimal"
+            android:textAlignment="textEnd"
             android:textColor="@android:color/white"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
     </LinearLayout>
 
